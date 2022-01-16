@@ -18,15 +18,16 @@ AUTHOR CONTACT:-
 emails: amrutkumarmeher@gmail.com
         Aeo_royals@outlook.com
 Github account: https://github.com/Royals-Aeo-Gamer/Heo-Leo
-Facebook account: https://www.facebook.com/amrutkumar.meher/
-Instagram account: https://www.instagram.com/amrut_kumar_meher_/
+Facebook account: https://www.facebook.com/profile.php?id=100077089008341
+Instagram account: https://www.instagram.com/mr_amthon/
 '''
 
 
 #delLineInFil
 #write the line which have to remove and if needed the add "\n".
 #the other argument is from which file(path) the line have to remove.
-def delLineLnFil(line_have_to_remove,from_file):
+def delLineLnFil(line_have_to_remove,from_file) -> None:
+    r"It delete a line in any text based file."
     read_to_make_list = open(str(from_file),"r")
     list_of_lines = read_to_make_list.readlines()
     format_to_edit = open(str(from_file),"w")
@@ -40,7 +41,8 @@ def delLineLnFil(line_have_to_remove,from_file):
 #write the line which have to remove in first argument.
 #write the name of file(Path) from which have to remove.
 #it require one more argument that is "num", adc the number of line list of similur line similur to your given line.
-def delLineInFil2(line_have_to_remove,from_file,num):
+def delLineInFil2(line_have_to_remove,from_file,num) -> None:
+    r"It delete a line in any text based file by number."
     read_to_make_list = open(str(from_file),"r")
     list_of_lines = read_to_make_list.readlines()
     format_to_edit = open(str(from_file),"w")
@@ -61,7 +63,8 @@ def delLineInFil2(line_have_to_remove,from_file,num):
 #Write which line have to remove by which line.
 #write the line by which this existing line have to replace.
 #write the file(path) from which the line have to remove.
-def replcLineInFil(line_have_to_replace,line_have_to_replace_from,from_file):
+def replcLineInFil(line_have_to_replace,line_have_to_replace_from,from_file) -> None:
+    r"it replace a line in any text based file."
     read_to_make_list = open(str(from_file),"r")
     list_of_lines = read_to_make_list.readlines()
     format_to_edit = open(str(from_file),"w")
@@ -76,7 +79,8 @@ def replcLineInFil(line_have_to_replace,line_have_to_replace_from,from_file):
 #searchLineInFile
 #write the line which have to remove.
 #wirite the file in which this line can be lye
-def searchLineInFile(which_line_have_to_search,in_which_file):
+def searchLineInFile(which_line_have_to_search,in_which_file) -> None:
+    r"it search for a line in given text based file and return a line number of the line if in case line is not in file then it will return None."
     read_to_make_list = open(str(in_which_file),"r")
     list_of_lines = read_to_make_list.readlines()
     for line in list_of_lines:
@@ -88,7 +92,8 @@ def searchLineInFile(which_line_have_to_search,in_which_file):
 #write the line by which the existing line have to replace.
 #write the file in which the replacement have to do.
 #write the number of line in the list of similar lines similar to your given line.
-def replcLineInFil2(what_have_to_replace,what_have_to_replace_by,in_which_file,number):
+def replcLineInFil2(what_have_to_replace,what_have_to_replace_by,in_which_file,number) -> None:
+    r"it replace a line in any text based file by number"
     read_to_make_list = open(str(in_which_file),"r")
     list_of_lines = read_to_make_list.readlines()
     format_to_edit = open(str(in_which_file),"w")
@@ -107,10 +112,10 @@ def replcLineInFil2(what_have_to_replace,what_have_to_replace_by,in_which_file,n
 #write the line that have to add.
 #write the file(path) in which these line\lines have to add.
 #it has a parameter "multi_line", it is for if you have to multiple line in text then assign it as True then it defalt
-#value is False, fo single line
-def addLineInFile(what_have_to_add,In_which_file,multi_lines=False):
+#value is False, for single line
+def addLineInFile(what_have_to_add,In_which_file,multi_lines=False) -> None:
+    r"it will add single/multi line in any text based file without remove its already present lines/text."
     readToMakeList = open(str(In_which_file),"r")
-
     list_of_lines = readToMakeList.readlines()
     formatToEdit = open(str(In_which_file),"w")
     for line in list_of_lines:
@@ -121,4 +126,19 @@ def addLineInFile(what_have_to_add,In_which_file,multi_lines=False):
         for line in what_have_to_add:
             formatToEdit.write(line)
 
+#insertLineInF
+#write the line that have to insert in any particular line number.
+#it can only insert a line at a time.
 
+def insertLineInF(what_have_to_insert,In_which_file,Line_number) -> None:
+    r"it will insert a line in text based file."
+    readToMakeList = open(str(In_which_file),"r")
+    list_of_lines = readToMakeList.readlines()
+    
+    format_to_edit = open(str(In_which_file),"w")
+    for line in list_of_lines:
+        if list_of_lines.index(line)+1 == int(Line_number):
+            format_to_edit.write(what_have_to_insert.__add__("\n"))
+            format_to_edit.write(line)
+        elif list_of_lines.index(line)+1 != int(Line_number):
+            format_to_edit.write(line)
