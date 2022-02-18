@@ -1,12 +1,11 @@
-# Node class
+# Node class (link list)
 class node:
     def __init__(self, data, next):
         self.data = data
         self.next = next
 
-
 # Link list class (main class)
-class llist:
+class LList:
     def __init__(self):
         self.top = None
 
@@ -55,7 +54,7 @@ class llist:
             prev = itr
             itr = itr.next
 
-    def remove_by_index(self, index):
+    def remove_by_index(self, index:int):
         itr = self.top
         count = 0
         prev = None
@@ -67,15 +66,107 @@ class llist:
             prev = itr
             count += 1
             itr = itr.next
-    def
+
+    def reverse(self):
+        prev = None
+        hold = self.top
+        hold_next = self.top.next
+        itr = self.top
+        while itr!=None:
+            hold.next = prev
+            prev = hold
+            if hold_next != None:
+                hold = hold_next
+                hold_next = hold_next.next
+            else:
+                break
+        self.top = prev
+
+# Node2 class (Double-link list)
+class node2:
+    def __init__(self,prev,data,next):
+        self.prev = prev
+        self.data = data
+        self.next = next
+
+# DoubleLList
+class DoubleLList:
+    def __init__(self):
+        self.top = None
+        self.tail = None
+
+    def append(self,data):
+        if self.top == None:
+            self.top = node2(None,data,self.top)
+            self.tail = self.top
+        else:
+            self.tail.next = node2(self.tail,data,None)
+            self.tail = self.tail.next
+
+    def remove_by_index(self,index:int):
+        if index < 0:
+            index = (abs(index))-1
+            itr = self.tail
+            count = 0
+            prev = None
+            while itr!=None:
+                if count == index:
+                    if prev!=None:
+                        prev.prev = itr.next
+                    itr.prev.next = prev
+                prev = itr
+                count+=1
+                itr = itr.prev
+        elif index == 0:
+            self.top = self.top.next
+        elif index > 0:
+            itr = self.top
+            count = 0
+            prev = None
+            while itr != None:
+                if index == 0:
+                    self.head = itr.next
+                elif count == index:
+                    prev.next = itr.next
+                prev = itr
+                count += 1
+                itr = itr.next
+    def remove(self,element):
+        itr = self.top
+        prev = None
+        while itr != None:
+            if element == self.top.data:
+                self.top = itr.next
+            elif itr.data == element:
+                prev.next = itr.next
+                break
+            prev = itr
+            itr = itr.next
+
+    def show_list(self):
+        itr = self.top
+        while itr!=None:
+            yield itr.data
+            itr = itr.next
+
+    def reverse(self):
+        prev = self.top.prev
+        hold = self.top
+        hold_next = self.top.next
+        itr = self.top
+        while itr != None:
+            hold.next = prev
+            prev = hold
+            if hold_next != None:
+                hold = hold_next
+                hold_next = hold_next.next
+            else:
+                break
+        self.top = prev
 
 if __name__ == "__main__":
-    ll = llist()
-    ll.append(2)
-    ll.append(6)
-    print(list(ll.show_list()))
-    ll.insert(4, 1)
-    ll.insert("nothing", 0)
-    print(list(ll.show_list()))
-    ll.remove("nothing")
-    print(list(ll.show_list()))
+    Dll = DoubleLList()
+    for i in range(1,10):
+        Dll.append(i)
+    Dll.reverse()
+    print(list(Dll.show_list()))
