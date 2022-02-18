@@ -163,10 +163,3 @@ class DoubleLList:
             else:
                 break
         self.top = prev
-
-if __name__ == "__main__":
-    Dll = DoubleLList()
-    for i in range(1,10):
-        Dll.append(i)
-    Dll.reverse()
-    print(list(Dll.show_list()))
