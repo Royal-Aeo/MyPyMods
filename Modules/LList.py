@@ -131,6 +131,7 @@ class DoubleLList:
                 prev = itr
                 count += 1
                 itr = itr.next
+
     def remove(self,element):
         itr = self.top
         prev = None
@@ -150,16 +151,13 @@ class DoubleLList:
             itr = itr.next
 
     def reverse(self):
-        prev = self.top.prev
+        prev = None
         hold = self.top
-        hold_next = self.top.next
-        itr = self.top
-        while itr != None:
+        itr = hold
+        while itr is not None:
+            prev = hold.prev
+            hold.prev = hold.next
             hold.next = prev
-            prev = hold
-            if hold_next != None:
-                hold = hold_next
-                hold_next = hold_next.next
-            else:
-                break
-        self.top = prev
+            itr = itr.prev
+        if prev is not None:
+            self.top = prev.prev
