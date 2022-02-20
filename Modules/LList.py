@@ -81,6 +81,46 @@ class LList:
             else:
                 break
         self.top = prev
+    
+    def __setitem__(self,index,new_data):
+        itr = self.top
+        count = 0
+        prev = None
+        while itr != None:
+            if index == 0:
+                self.top = node(new_data, itr)
+                break
+            elif count == index:
+                e = itr
+                prev.next = node(new_data, e)
+                break
+            count += 1
+            prev = itr
+            itr = itr.next
+            
+    def __delitem__(self,index):
+        count = 0
+        itr = self.top
+        prev = None
+        while itr != None:
+            if index == 0:
+                self.top = itr.next
+            elif index == count:
+                prev.next = itr.next
+                break
+            prev = itr
+            itr = itr.next
+            count+=1
+
+    def __getitem__(self,index):
+        count = 0
+        itr = self.top
+        while itr != None:
+            if index == count:
+                return itr.data
+            count += 1
+            itr = itr.next
+
 
 # Node2 class (Double-link list)
 class node2:
@@ -161,3 +201,58 @@ class DoubleLList:
             itr = itr.prev
         if prev is not None:
             self.top = prev.prev
+    
+    def __setitem__(self,index,new_data):
+        itr = self.top
+        count = 0
+        prev = None
+        while itr != None:
+            if index == 0:
+                self.top = node(new_data, itr)
+                itr.prev = self.top
+                break
+            elif count == index:
+                prev.next = node(new_data, itr)
+                itr.prev = prev.next
+                break
+            count += 1
+            prev = itr
+            itr = itr.next
+            
+    def __delitem__(self,index):
+        if index < 0:
+            index = (abs(index))-1
+            itr = self.tail
+            count = 0
+            prev = None
+            while itr!=None:
+                if count == index:
+                    if prev!=None:
+                        prev.prev = itr.next
+                    itr.prev.next = prev
+                prev = itr
+                count+=1
+                itr = itr.prev
+        elif index == 0:
+            self.top = self.top.next
+        elif index > 0:
+            itr = self.top
+            count = 0
+            prev = None
+            while itr != None:
+                if index == 0:
+                    self.head = itr.next
+                elif count == index:
+                    prev.next = itr.next
+                prev = itr
+                count += 1
+                itr = itr.next
+
+    def __getitem__(self,index):
+        count = 0
+        itr = self.top
+        while itr != None:
+            if index == count:
+                return itr.data
+            count += 1
+            itr = itr.next
