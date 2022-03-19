@@ -42,12 +42,15 @@ class BTreeNode:
             self.right = None
         else:
             raise NameError(f"Please us 'left'/'right' not {pos}")
-
-
-if __name__ == "__main__":
-    ins =  BTreeNode(50)
-    for i in range(1,101):
-        ins.add_child(i)
-    for i in range(1,101):
-        ins.add_child(i)
-    print(ins.show())
+    
+    def safe_del(self,pos):
+        if pos == "left" and (self.left.left != None or self.left.right != None):
+            max = self.left
+            focus = self.left
+            while focus != None and focus.right != None:
+                if focus.data < focus.right.data:
+                    max = focus.right
+                focus = focus.right
+        
+            max.left,max.right,max.parent = self,self,self
+            self.left = max
