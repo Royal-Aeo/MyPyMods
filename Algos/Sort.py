@@ -21,3 +21,16 @@ def bubbleSort(array,small_to_big=True):
                 var = array[next]
                 array[next] = array[i]
                 array[i] = var
+
+def interselectionsort(array,small_to_big=True):
+    for i in range(1,len(array)):
+        hold = array[i]
+        back_itr = i-1
+        if small_to_big == True:
+            while back_itr >= 0 and hold < array[back_itr]:
+                array[back_itr+1],array[back_itr] = array[back_itr],array[back_itr+1]
+                back_itr-=1
+        elif small_to_big == False:
+            while back_itr >= 0 and hold > array[back_itr]:
+                array[back_itr+1],array[back_itr] = array[back_itr],array[back_itr+1]
+                back_itr-=1
